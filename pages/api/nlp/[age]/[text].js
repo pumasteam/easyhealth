@@ -1,5 +1,5 @@
 const nlp = async (req, res) => {
-  const { body } = req;
+  const { text, age } = req.query;
 
   const resp = await fetch("https://api.infermedica.com/v3/parse", {
     method: "POST",
@@ -9,9 +9,9 @@ const nlp = async (req, res) => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      text: body.text,
+      text: text,
       age: {
-        value: body.age,
+        value: parseInt(age),
       },
     }),
   });

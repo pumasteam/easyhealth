@@ -1,12 +1,11 @@
 datasource db {
-    provider             = "mysql"
-    url                  = env("DATABASE_URL")
-    referentialIntegrity = "prisma"
+    provider          = "postgresql"
+    url               = env("DATABASE_URL")
+    shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
 }
 
 generator client {
-    provider        = "prisma-client-js"
-    previewFeatures = ["referentialIntegrity"]
+    provider = "prisma-client-js"
 }
 
 model Account {
@@ -54,14 +53,20 @@ model VerificationToken {
     @@unique([identifier, token])
 }
 
-model Diagnosis {
-    id          String @id @default(cuid())
+model Patient {
+    id          String  @id @default(cuid())
     name        String
-    image       String
-    age         Int
-    sex         Int
-    description String
-    nlp         String
-    content     String
-    emergency   Boolean
+    image       String?
+    age         Int?
+    sex         Int?
+    description String?
+    nlp         String?
+    content     String?
+}
+
+model Consultation {
+    id        String   @id @default(cuid())
+    notes     String
+    patientId String?
+    createdAt DateTime @default(now())
 }

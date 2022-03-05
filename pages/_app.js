@@ -1,17 +1,15 @@
 import { SessionProvider, useSession, signIn } from "next-auth/react";
+import Head from "next/head";
+import Header from "../components/Header";
+import Loading from "../components/Loading";
 import "../styles/globals.css";
 
 const Auth = ({ children, isRequired }) => {
   const { data: session, status } = useSession();
 
-  if (status === "loading")
-    return (
-      <div className="flex h-screen">
-        <div className="m-auto">
-          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-gray-900"></div>
-        </div>
-      </div>
-    );
+  if (status === "loading") {
+    return <Loading />;
+  }
 
   if (isRequired && !session) {
     signIn();
@@ -20,10 +18,14 @@ const Auth = ({ children, isRequired }) => {
   return children;
 };
 
-const App = ({ Component, pageProps }) => {
+const App = ({ Component, pageProps: { session, ...pageProps } }) => {
   return (
     <SessionProvider session={session}>
+      <Head>
+        <title>MedicAid</title>
+      </Head>
       <Auth isRequired={Component.auth}>
+        <Header />
         <Component {...pageProps} />
       </Auth>
     </SessionProvider>
