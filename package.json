@@ -7,7 +7,9 @@
     "start": "next start",
     "lint": "next lint",
     "test": "semistandard",
-    "format": "semistandard --fix"
+    "format": "semistandard --fix",
+    "generate": "prisma generate",
+    "migrate": "prisma migrate dev"
   },
   "dependencies": {
     "@next-auth/prisma-adapter": "^1.0.1",

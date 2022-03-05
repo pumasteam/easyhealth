@@ -56,7 +56,10 @@ model VerificationToken {
 
 model Diagnosis {
     id          String @id @default(cuid())
-    Name        String
+    name        String
+    image       String
+    age         Int
+    sex         Int
     description String
     nlp         String
     content     String
