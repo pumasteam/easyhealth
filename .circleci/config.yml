@@ -22,11 +22,8 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Update NPM
-          command: "sudo npm install -g npm@5"
-      - run:
-          name: Install vercel
-          command: "sudo npm install -g vercel"
+          name: Install Dependencies
+          command: yarn
       - run:
           name: Deploy
           command: vercel --token $CIRCLE_TOKEN --name $CIRCLE_PROJECT_REPONAME --prod --no-open
