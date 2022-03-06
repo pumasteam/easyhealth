@@ -7,18 +7,8 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Update NPM
-          command: "sudo npm install -g npm@5"
-      - run:
-          name: Install yarn
-          command: "sudo npm install -g yarn"
-      - run:
           name: Install Dependencies
           command: yarn
-      - save_cache:
-          key: dependency-cache-{{ checksum "package-lock.json" }}
-          paths:
-            - ./node_modules
       - run:
           name: Run Lint
           command: yarn lint
@@ -34,20 +24,9 @@ jobs:
       - run:
           name: Update NPM
           command: "sudo npm install -g npm@5"
-      - restore_cache:
-          key: dependency-cache-{{ checksum "package-lock.json" }}
       - run:
           name: Install vercel
           command: "sudo npm install -g vercel"
-      - restore_cache:
-          key: dependency-cache-{{ checksum "package-lock.json" }}
-      - run:
-          name: Install Dependencies
-          command: yarn
-      - save_cache:
-          key: dependency-cache-{{ checksum "package-lock.json" }}
-          paths:
-            - ./node_modules
       - run:
           name: Deploy
           command: vercel --token $CIRCLE_TOKEN --name $CIRCLE_PROJECT_REPONAME --prod --no-open
