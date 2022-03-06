@@ -26,7 +26,7 @@ jobs:
           command: yarn
       - run:
           name: Deploy
-          command: yarn deploy --token $VERCEL_TOKEN --name $VERCEL_NAME --prod
+          command: yarn deploy --token $VERCEL_TOKEN --prod
 
 workflows:
   check-deploy:
