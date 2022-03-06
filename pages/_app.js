@@ -1,13 +1,13 @@
-import { SessionProvider, useSession, signIn } from "next-auth/react";
-import Head from "next/head";
-import Header from "../components/Header";
-import Loading from "../components/Loading";
-import "../styles/globals.css";
+import { SessionProvider, useSession, signIn } from 'next-auth/react';
+import Head from 'next/head';
+import Header from '../components/Header';
+import Loading from '../components/Loading';
+import '../styles/globals.css';
 
 const Auth = ({ children, isRequired }) => {
   const { data: session, status } = useSession();
 
-  if (status === "loading") {
+  if (status === 'loading') {
     return <Loading />;
   }
 
