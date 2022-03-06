@@ -26,7 +26,7 @@ jobs:
           command: yarn
       - run:
           name: Deploy
-          command: vercel --token $CIRCLE_TOKEN --name $CIRCLE_PROJECT_REPONAME --prod --no-open
+          command: yarn deploy --token $CIRCLE_TOKEN --name $CIRCLE_PROJECT_REPONAME --prod --no-open
 
 workflows:
   check-deploy:
