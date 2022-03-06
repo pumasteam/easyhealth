@@ -13,8 +13,8 @@ jobs:
           name: Run Lint
           command: yarn lint
       - run:
-          name: Migrate database
-          command: yarn migrate
+          name: Run Build
+          command: yarn build
   deploy:
     working_directory: ~/repo
     docker:
@@ -27,9 +27,22 @@ jobs:
       - run:
           name: Deploy
           command: yarn deploy --token $VERCEL_TOKEN --prod
+  migrate-db:
+    working_directory: ~/repo
+    docker:
+      - image: cimg/node:16.13.2
+    steps:
+      - checkout
+      - run:
+          name: Install Dependencies
+          command: yarn
+      - run:
+          name: Migrate database
+          command: yarn migrate
 
 workflows:
   check-deploy:
     jobs:
       - checks
       - deploy
+      - migrate-db
