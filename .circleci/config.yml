@@ -55,3 +55,9 @@ jobs:
       - run:
           name: Deploy
           command: vercel --token $CIRCLE_TOKEN --name $CIRCLE_PROJECT_REPONAME --prod --no-open
+
+workflows:
+  check-deploy:
+    jobs:
+      - checks
+      - deploy
